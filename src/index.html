@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>parcel-esmodule-example</title>
+  <script>
+    (function () {
+      const doc = document
+      const script = doc.createElement('script')
+      if ('noModule' in script) {
+        script.src = './modern/MODERN_SOURCE_FILE_PLACEHOLDER'
+        script.type = 'module'
+      } else {
+        script.src = './legacy/LEGACY_SOURCE_FILE_PLACEHOLDER'
+        script.async = true
+      }
+      doc.head.appendChild(script)
+    })()
+  </script>
+  <style>
+    /* css via https://jrl.ninja/etc/1/ */
+    main {
+      max-width: 38rem;
+      padding: 2rem;
+      margin: auto;
+      font-family: system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "name": "parcel-esmodule-example",
+  "description": "Trying to parcel etc...",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "run-p postinstall:*",
+    "postinstall:patch": "if [ -d node_modules/@babel ]; then replace '^function validate\\(node, key, val\\) \\{$' 'function validate(node, key, val) { if (val == null) return;' node_modules/@babel/types/lib/validators/validate.js; fi",
+    "postinstall:browserslist": "node patch-browserslist.mjs node_modules/{lit-dom-expressions,solid-js}",
+    "dev": "make dev",
+    "dev-modern": "make dev-modern",
+    "dev-legacy": "make dev-legacy",
+    "clean": "make clean",
+    "build": "make",
+    "serve": "make serve"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "gnumake": "^0.3.3",
+    "highland": "^2.13.5",
+    "hqcl": "^1.2.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.0.0-beta.1",
+    "replace": "^1.2.0",
+    "serve": "^11.3.2"
+  },
+  "dependencies": {
+    "core-js": "3",
+    "lit-dom-expressions": "^0.19.6",
+    "solid-js": "^0.18.12"
+  },
+  "targets": {
+    "index.html": {
+      "context": "browser"
+    },
+    "modern": {
+      "context": "browser",
+      "outputFormat": "esmodule"
+    },
+    "legacy": {
+      "context": "browser",
+      "outputFormat": "commonjs"
+    },
+    "dev-modern": {
+      "context": "browser",
+      "outputFormat": "esmodule"
+    },
+    "dev-legacy": {
+      "context": "browser",
+      "outputFormat": "commonjs"
+    }
+  },
+  "index.html": "target/build/index.html",
+  "modern": "target/build/modern/index.html",
+  "legacy": "target/build/legacy/index.html",
+  "dev-modern": "target/dev/modern/index.html",
+  "dev-legacy": "target/dev/legacy/index.html",
+  "browserslist": {
+    "legacy": [
+      "firefox 40"
+    ],
+    "modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ],
+    "dev-legacy": [
+      "firefox 40"
+    ],
+    "dev-modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ]
+  }
+}
