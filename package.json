@@ -17,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "babel-preset-solid": "^0.18.12",
     "gnumake": "^0.3.3",
     "highland": "^2.13.5",
     "hqcl": "^1.2.0",
