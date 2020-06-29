@@ -21,6 +21,8 @@
     "gnumake": "^0.3.3",
     "highland": "^2.13.5",
     "hqcl": "^1.2.0",
+    "html-select": "^2.3.24",
+    "html-tokenize": "^2.0.1",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.0.0-beta.1",
     "replace": "^1.2.0",
