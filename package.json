@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "run-p postinstall:*",
     "postinstall:patch": "if [ -d node_modules/@babel ]; then replace '^function validate\\(node, key, val\\) \\{$' 'function validate(node, key, val) { if (val == null) return;' node_modules/@babel/types/lib/validators/validate.js; fi",
-    "postinstall:browserslist": "node patch-browserslist.mjs node_modules/{lit-dom-expressions,solid-js}",
+    "postinstall:browserslist": "node patch-browserslist.mjs node_modules/lit-dom-expressions node_modules/solid-js",
     "dev": "make dev",
     "dev-modern": "make dev-modern",
     "dev-legacy": "make dev-legacy",
