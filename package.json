@@ -10,6 +10,7 @@
     "dev": "make dev",
     "dev-modern": "make dev-modern",
     "dev-legacy": "make dev-legacy",
+    "start": "make serve",
     "clean": "make clean",
     "build": "make",
     "serve": "make serve"
