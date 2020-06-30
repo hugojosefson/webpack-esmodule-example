@@ -1,11 +1,19 @@
+const browserslistEnv = process.env.BROWSERSLIST_ENV
+const isLegacy = browserslistEnv === 'legacy'
+
 module.exports = {
   presets: [
     'babel-preset-solid',
     ['@babel/preset-env', {
-      browserslistEnv: process.env.BROWSERSLIST_ENV,
+      browserslistEnv,
       bugfixes: true,
-      corejs: 3,
-      useBuiltIns: 'entry'
+      ...(isLegacy ? {
+        corejs: 3,
+        useBuiltIns: 'usage'
+      } : {
+        corejs: false,
+        useBuiltIns: false
+      })
     }]
   ],
 }
