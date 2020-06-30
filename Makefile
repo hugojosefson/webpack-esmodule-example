@@ -43,22 +43,17 @@ $(DEV)/legacy/port:
 	$(MKDIRP) $(DEV)/legacy
 	echo 1235 > $(DEV)/legacy/port
 
-$(DIST)/index.html: $(BUILD)/index.html $(BUILD)/script-name-legacy $(BUILD)/script-name-modern $(BUILD)/legacy/index.html $(BUILD)/modern/index.html
+$(DIST)/index.html: $(BUILD)/index.html $(BUILD)/script-tag-legacy $(BUILD)/script-tag-modern $(BUILD)/legacy/index.html $(BUILD)/modern/index.html
 	$(MKDIRP) $(DIST)
 	$(CP) -r $(BUILD)/* $(DIST)
 	$(CAT) $< \
-	| $(SED) -E "s#LEGACY_SOURCE_FILE_PLACEHOLDER#$(shell $(CAT) $(BUILD)/script-name-legacy)#g" \
-	| $(SED) -E "s#MODERN_SOURCE_FILE_PLACEHOLDER#$(shell $(CAT) $(BUILD)/script-name-modern)#g" \
+	| $(SED) -E 's#<script type="placeholder"></script>#''$(shell $(CAT) $(BUILD)/script-tag-*)''#' \
 	> $@
-	$(RM) $(DIST)/*/index.html $(DIST)/script-name-*
+	$(RM) $(DIST)/*/index.html $(DIST)/script-tag-*
 
-$(BUILD)/script-name-%: $(BUILD)/%/index.html
+$(BUILD)/script-tag-%: $(BUILD)/%/index.html
 	$(MKDIRP) $(@D)
-	$(HTML_TOKENIZE) < $< \
-	| $(HTML_SELECT) 'head script[src]' \
-	| $(GREP) -E '^\["open"' \
-	| $(SED) -E 's#^.*src=\\"([^\]+).*#\1#' \
-	> $@
+	$(HTML_TOKENIZE) < $< | $(HTML_SELECT) --raw 'script' > $@
 
 $(BUILD)/index.html: src/index.html
 	$(MKDIRP) $(BUILD)
@@ -66,4 +61,4 @@ $(BUILD)/index.html: src/index.html
 
 $(BUILD)/%/index.html: src/index-%.html
 	$(MKDIRP) $(@D)
-	( BROWSERSLIST_ENV=$* $(PARCEL) build --public-url . --target $* $< )
+	( BROWSERSLIST_ENV=$* $(PARCEL) build --public-url $*/ --target $* $< )
