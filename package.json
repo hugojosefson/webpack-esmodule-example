@@ -67,13 +67,6 @@
     "modern": [
       "last 1 chrome version",
       "last 1 firefox version"
-    ],
-    "dev-legacy": [
-      "firefox 40"
-    ],
-    "dev-modern": [
-      "last 1 chrome version",
-      "last 1 firefox version"
     ]
   }
 }

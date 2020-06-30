@@ -28,7 +28,7 @@ dev:
 .PHONY: dev-%
 dev-%: src/index-%-dev.html $(DEV)/%/port
 	$(MKDIRP) $(DEV)/$*
-	( BROWSERSLIST_ENV=dev-$* \
+	( BROWSERSLIST_ENV=$* \
 	$(PARCEL) serve \
 	--port $(shell $(CAT) $(DEV)/$*/port) \
 	--dist-dir $(DEV)/$* \
