@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "core-js": "3",
-    "lit-dom-expressions": "^0.19.6",
+    "lit-dom-expressions": "^0.19.7",
     "solid-js": "^0.18.12"
   },
   "targets": {

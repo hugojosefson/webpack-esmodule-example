@@ -4439,10 +4439,10 @@ listr2@^2.1.0:
     rxjs "^6.5.5"
     through "^2.3.8"
 
-lit-dom-expressions@^0.19.6:
-  version "0.19.6"
-  resolved "https://registry.yarnpkg.com/lit-dom-expressions/-/lit-dom-expressions-0.19.6.tgz#a2cb22c8001e412b22e0ccad96cdcb26587bafd4"
-  integrity sha512-3KjOOQ6r8WcIguV/wW0CcR0oAs+t7aJFOmpzMUG4k5n+a7EUwQVGdfpwycOs9GK728aqMJ4X4zsTCVlq7tSbBw==
+lit-dom-expressions@^0.19.7:
+  version "0.19.7"
+  resolved "https://registry.yarnpkg.com/lit-dom-expressions/-/lit-dom-expressions-0.19.7.tgz#ed6aca672cd0d6bbb9be29e682ccb5eb341cf05d"
+  integrity sha512-a5fKFDRpuuIJ/GYw/gnN7gwiobwITXcYBoQv6QtdPgHL8pH7JWrjS/tM45BFt659mqdOYckGEvpMXHmoch270Q==
 
 load-json-file@^4.0.0:
   version "4.0.0"
