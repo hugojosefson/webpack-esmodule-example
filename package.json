@@ -62,11 +62,14 @@
   "dev-legacy": "target/dev/legacy/index.html",
   "browserslist": {
     "legacy": [
+      "ie 10",
       "firefox 40"
     ],
     "modern": [
-      "last 1 chrome version",
-      "last 1 firefox version"
+      "chrome 61",
+      "firefox 60",
+      "edge 16",
+      "safari 10.1"
     ]
   }
 }
