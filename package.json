@@ -1,6 +1,6 @@
 {
   "name": "parcel-esmodule-example",
-  "description": "Trying to parcel etc...",
+  "description": "Trying to parcel etc for both modern and legacy browsers.",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
