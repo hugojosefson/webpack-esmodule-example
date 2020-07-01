@@ -1,4 +1,7 @@
+import {resolve} from './async-component.mjs'
 import {render} from 'solid-js/dom'
-import App from './app.jsx'
 
-render(() => <App/>, document.getElementById('root'))
+(async () => {
+  const App = await (await resolve(import('./app.jsx')))()
+  render(() => <App/>, document.getElementById('root'))
+})()
