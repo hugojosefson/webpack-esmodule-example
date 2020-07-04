@@ -8,7 +8,7 @@
  */
 export const resolve = async imported => {
   if (imported == null) {
-    throw new Error(`Did you just import ${JSON.stringify(imported)}?`)
+    return imported
   }
 
   if (typeof imported.then === 'function') {
