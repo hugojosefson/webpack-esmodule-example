@@ -35,10 +35,14 @@
     "solid-js": "^0.18.12"
   },
   "targets": {
-    "index.html": {
+    "root": {
       "context": "browser"
     },
     "modern": {
+      "context": "browser",
+      "outputFormat": "esmodule"
+    },
+    "modern-dev": {
       "context": "browser",
       "outputFormat": "esmodule"
     },
@@ -46,20 +50,16 @@
       "context": "browser",
       "outputFormat": "commonjs"
     },
-    "dev-modern": {
-      "context": "browser",
-      "outputFormat": "esmodule"
-    },
-    "dev-legacy": {
+    "legacy-dev": {
       "context": "browser",
       "outputFormat": "commonjs"
     }
   },
-  "index.html": "target/build/index.html",
-  "modern": "target/build/modern/index.html",
-  "legacy": "target/build/legacy/index.html",
-  "dev-modern": "target/dev/modern/index.html",
-  "dev-legacy": "target/dev/legacy/index.html",
+  "root": "target/build/root/index.html",
+  "modern": "target/build/variant/modern/index.html",
+  "modern-dev": "target/dev/variant/modern/index.html",
+  "legacy": "target/build/variant/legacy/index.html",
+  "legacy-dev": "target/dev/variant/legacy/index.html",
   "browserslist": {
     "legacy": [
       "ie 10",
