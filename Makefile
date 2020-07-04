@@ -1,4 +1,5 @@
 include node_modules/gnumake/gnumake.mk
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d)) # via https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html
 
 BUILD := target/build
 DIST := target/dist
@@ -55,10 +56,10 @@ $(BUILD)/script-tag-%: $(BUILD)/%/index.html
 	$(MKDIRP) $(@D)
 	$(HTML_TOKENIZE) < $< | $(HTML_SELECT) --raw 'script' > $@
 
-$(BUILD)/index.html: src/index.html
+$(BUILD)/index.html: src/index.html src/favicon.ico
 	$(MKDIRP) $(BUILD)
 	$(PARCEL) build --public-url . --no-source-maps --target index.html src/index.html
 
-$(BUILD)/%/index.html: src/index-%.html
+$(BUILD)/%/index.html: src/index-%.html $(call rwildcard,src/,*)
 	$(MKDIRP) $(@D)
 	( BROWSERSLIST_ENV=$* $(PARCEL) build --public-url $*/ --target $* $< )
