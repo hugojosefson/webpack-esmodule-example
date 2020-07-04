@@ -47,6 +47,8 @@ $(DEV):
 
 $(PROD)/index.html: $(BUILD)/root/index.html $(call rwildcard,$(BUILD)/root/,*) $(BUILD)/script-tag-legacy $(BUILD)/script-tag-modern $(BUILD)/variant/legacy/index.html $(BUILD)/variant/modern/index.html $(call rwildcard,$(BUILD)/variant/,*)
 	$(MKDIRP) $(PROD)
+	$(RM) -rf $(PROD)
+	$(MKDIRP) $(PROD)
 	$(CP) -r $(BUILD)/root/* $(BUILD)/variant/* $(PROD)
 	$(CAT) $< \
 	| $(SED) -E 's#<script type="placeholder"></script>#''$(shell $(CAT) $(BUILD)/script-tag-*)''#' \
@@ -58,9 +60,11 @@ $(BUILD)/script-tag-%: $(BUILD)/variant/%/index.html
 	$(HTML_TOKENIZE) < $< | $(HTML_SELECT) --raw 'script' > $@
 
 $(BUILD)/root/index.html: src/root/index.html $(call rwildcard,src/root/,*)
-	$(MKDIRP) $(BUILD)
+	$(MKDIRP) $(BUILD)/root
+	$(FIND) $(BUILD)/root -type f -not -name index.html -delete
 	$(PARCEL) build --public-url . --no-source-maps --target root src/root/index.html
 
 $(BUILD)/variant/%/index.html: src/variant/%/prod/index.html $(call rwildcard,src/common/,*) $(call rwildcard,src/variant/%/prod/,*)
 	$(MKDIRP) $(@D)
+	$(FIND) $(@D) -type f -not -name index.html -delete
 	( BROWSERSLIST_ENV=$* $(PARCEL) build --public-url $*/ --target $* $< )
