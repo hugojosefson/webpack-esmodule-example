@@ -4,9 +4,6 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "postinstall": "run-p postinstall:*",
-    "postinstall:patch": "if [ -d node_modules/@babel ]; then replace '^function validate\\(node, key, val\\) \\{$' 'function validate(node, key, val) { if (val == null) return;' node_modules/@babel/types/lib/validators/validate.js; fi",
-    "postinstall:browserslist": "node patch-browserslist.mjs node_modules/lit-dom-expressions node_modules/solid-js",
     "dev": "make dev",
     "dev-modern": "make dev-modern",
     "dev-legacy": "make dev-legacy",
@@ -16,61 +13,18 @@
     "serve": "make serve"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
     "babel-preset-solid": "^0.18.12",
     "gnumake": "^0.3.3",
-    "highland": "^2.13.5",
     "hqcl": "^1.2.0",
     "html-select": "^2.3.24",
     "html-tokenize": "^2.0.1",
     "npm-run-all": "^4.1.5",
-    "parcel": "^2.0.0-beta.1",
     "replace": "^1.2.0"
   },
   "dependencies": {
-    "core-js": "3",
     "lit-dom-expressions": "^0.19.7",
     "serve": "^11.3.2",
     "solid-js": "^0.18.12"
-  },
-  "targets": {
-    "root": {
-      "context": "browser"
-    },
-    "modern": {
-      "context": "browser",
-      "outputFormat": "esmodule"
-    },
-    "modern-dev": {
-      "context": "browser",
-      "outputFormat": "esmodule"
-    },
-    "legacy": {
-      "context": "browser",
-      "outputFormat": "commonjs"
-    },
-    "legacy-dev": {
-      "context": "browser",
-      "outputFormat": "commonjs"
-    }
-  },
-  "root": "target/build/root/index.html",
-  "modern": "target/build/variant/modern/index.html",
-  "modern-dev": "target/dev/variant/modern/index.html",
-  "legacy": "target/build/variant/legacy/index.html",
-  "legacy-dev": "target/dev/variant/legacy/index.html",
-  "browserslist": {
-    "legacy": [
-      "ie 10",
-      "firefox 40"
-    ],
-    "modern": [
-      "chrome 61",
-      "firefox 60",
-      "edge 16",
-      "safari 10.1"
-    ]
   },
   "engines": {
     "node": ">=14.4"
