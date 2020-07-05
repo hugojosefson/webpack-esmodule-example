@@ -9,7 +9,7 @@
     "dev": "make dev",
     "dev-modern": "make dev-modern",
     "dev-legacy": "make dev-legacy",
-    "start": "serve target/dist",
+    "start": "serve target/prod",
     "clean": "make clean",
     "build": "make",
     "serve": "make serve"
