@@ -13,6 +13,7 @@
     "serve": "make serve"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
     "babel-preset-solid": "^0.18.12",
     "gnumake": "^0.3.3",
     "hqcl": "^1.2.0",
