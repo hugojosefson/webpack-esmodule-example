@@ -9,7 +9,7 @@ module.exports = {
       bugfixes: true,
       ...(isLegacy ? {
         corejs: 3,
-        useBuiltIns: 'usage'
+        useBuiltIns: 'entry'
       } : {
         corejs: false,
         useBuiltIns: false
