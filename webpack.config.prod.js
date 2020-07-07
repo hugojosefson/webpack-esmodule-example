@@ -6,7 +6,7 @@ const CommonConfig = require('./webpack.config.common.js')
 const variants = ['legacy', 'modern']
 
 module.exports = variants.map(variant => {
-  const commonConfig = CommonConfig(variant)
+  const commonConfig = CommonConfig({variant, env: 'prod'})
   return {
     ...commonConfig,
     name: variant,

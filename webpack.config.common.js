@@ -3,27 +3,24 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
-const choose = variant => variants => variants[variant]
+const choose = variant => choices => choices[variant]
 
-module.exports = variant => ({
-  entry: choose(variant)({
-    legacy: './src/variant/legacy/index.js',
-    modern: './src/common/index.jsx'
-  }),
+module.exports = ({variant, env}) => ({
+  entry: `./src/variant/${variant}/index.jsx`,
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, `target/prod/${variant}`)
+    path: path.resolve(__dirname, `target/${env}/${variant}`)
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: true,
-      template: path.resolve(__dirname, 'src', 'variant', variant, 'prod', 'index.html'),
+      template: path.resolve(__dirname, 'src', 'variant', variant, 'index.html'),
     }),
     new ScriptExtHtmlWebpackPlugin(choose(variant)({
-      legacy: {defaultAttribute: 'async'},
-      modern: {module: /.*/}
+      legacy: { defaultAttribute: 'async' },
+      modern: { module: /.*/ },
     })),
   ],
   module: {
