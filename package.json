@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "serve target/prod",
-    "build": "run-p build:*",
-    "build:modern": "BROWSERSLIST_ENV=modern webpack --config=webpack.config.prod.js",
-    "build:legacy": "BROWSERSLIST_ENV=legacy webpack --config=webpack.config.prod.js"
+    "build": "webpack --config=webpack.config.prod.js",
+    "build:modern": "webpack --config=webpack.config.prod.js --config-name=modern",
+    "build:legacy": "webpack --config=webpack.config.prod.js --config-name=legacy"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

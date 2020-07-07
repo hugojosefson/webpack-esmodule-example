@@ -1,17 +1,15 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
-const VALID_VARIANTS = ['legacy', 'modern']
-const variant = process.env.BROWSERSLIST_ENV
-if (!VALID_VARIANTS.includes(variant)) {
-  throw new Error(`BROWSERSLIST_ENV must be one of ${VALID_VARIANTS.map(JSON.stringify).join(', ')}.`)
-}
-const isLegacy = variant === 'legacy'
+const choose = variant => variants => variants[variant]
 
-module.exports = {
-  entry: isLegacy ? './src/variant/legacy/index.js' : './src/common/index.jsx',
+module.exports = variant => ({
+  entry: choose(variant)({
+    legacy: './src/variant/legacy/index.js',
+    modern: './src/common/index.jsx'
+  }),
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, `target/prod/${variant}`)
@@ -23,21 +21,40 @@ module.exports = {
       inject: true,
       template: path.resolve(__dirname, 'src', 'variant', variant, 'prod', 'index.html'),
     }),
-    new ScriptExtHtmlWebpackPlugin(isLegacy ? {
-      defaultAttribute: 'async'
-    } : {
-      module: /.*/
-    }),
+    new ScriptExtHtmlWebpackPlugin(choose(variant)({
+      legacy: {defaultAttribute: 'async'},
+      modern: {module: /.*/}
+    })),
   ],
   module: {
     rules: [
       {
         test: /\.(m?js|jsx)$/,
-        // exclude: /[\\/]node_modules[\\/]/,
+        // exclude: /[\\/]node_modules[\\/]/, // babel all the things!
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [
+              'babel-preset-solid',
+              ['@babel/preset-env', {
+                browserslistEnv: variant,
+                bugfixes: true,
+                ...(choose(variant)({
+                  legacy: {
+                    corejs: 3,
+                    useBuiltIns: 'entry'
+                  },
+                  modern: {
+                    corejs: false,
+                    useBuiltIns: false
+                  }
+                }))
+              }]
+            ],
+          }
+
         },
       },
     ]
   }
-}
+})
