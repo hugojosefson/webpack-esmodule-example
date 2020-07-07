@@ -4,15 +4,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "webpack-modern": "BROWSERSLIST_ENV=modern webpack --config=webpack.config.prod.js",
-    "webpack-legacy": "BROWSERSLIST_ENV=legacy webpack --config=webpack.config.prod.js",
-    "dev": "make dev",
-    "dev-modern": "make dev-modern",
-    "dev-legacy": "make dev-legacy",
     "start": "serve target/prod",
-    "clean": "make clean",
-    "build": "make",
-    "serve": "make serve"
+    "build": "run-p build:*",
+    "build:modern": "BROWSERSLIST_ENV=modern webpack --config=webpack.config.prod.js",
+    "build:legacy": "BROWSERSLIST_ENV=legacy webpack --config=webpack.config.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -21,24 +16,19 @@
     "babel-preset-solid": "^0.18.12",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.6.0",
-    "gnumake": "^0.3.3",
-    "hqcl": "^1.2.0",
-    "html-select": "^2.3.24",
-    "html-tokenize": "^2.0.1",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "npm-run-all": "^4.1.5",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "replace": "^1.2.0",
     "script-ext-html-webpack-plugin": "^2.1.4",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^3.0.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "core-js": "3",
     "lit-dom-expressions": "^0.19.7",
     "regenerator-runtime": "^0.13.5",
     "serve": "^11.3.2",
