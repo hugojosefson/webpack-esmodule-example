@@ -1,0 +1,7 @@
+/* css via https://jrl.ninja/etc/1/ */
+main {
+  max-width: 38rem;
+  padding: 2rem;
+  margin: auto;
+  font-family: system-ui, sans-serif;
+}

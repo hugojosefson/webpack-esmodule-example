@@ -1,7 +1,15 @@
+import './style.css'
 import {resolve} from './async-component.mjs'
 import {render} from 'solid-js/dom'
 
+const createDivAndAppendTo = parentElement => {
+  const element = document.createElement('div')
+  parentElement.appendChild(element)
+  return element
+}
+
 (async () => {
   const App = await (await resolve(import('./app.jsx')))()
-  render(() => <App/>, document.getElementById('root'))
+  const root = createDivAndAppendTo(document.body);
+  render(() => <App/>, root)
 })()

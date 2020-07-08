@@ -15,8 +15,13 @@ module.exports = ({variant, env}) => ({
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      inject: true,
-      template: path.resolve(__dirname, 'src', 'variant', variant, 'index.html'),
+      inject: 'head',
+      title: `${variant}/parcel-esmodule-example`,
+      favicon: 'public/favicon.ico',
+      meta: {
+        viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
+        'X-UA-Compatible': {'http-equiv': 'X-UA-Compatible', content: 'ie=edge'}
+      }
     }),
     new ScriptExtHtmlWebpackPlugin(choose(variant)({
       legacy: { defaultAttribute: 'async' },
