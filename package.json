@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "serve target/prod",
+    "prebuild": "run-s clean",
     "clean": "rimraf target",
     "build": "webpack --config=webpack.config.prod.js",
     "build:modern": "webpack --config=webpack.config.prod.js --config-name=modern",
