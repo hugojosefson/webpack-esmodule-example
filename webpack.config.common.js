@@ -7,14 +7,14 @@ const choose = variant => choices => choices[variant]
 module.exports = ({variant, env}) => ({
   entry: `./src/variant/${variant}/index.jsx`,
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, `target/${env}/${variant}`)
+    filename: `${variant}.[name].[contenthash].js`,
+    path: path.resolve(__dirname, `target/${env}`)
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: `index-${variant}.html`,
       inject: 'head',
-      title: `${variant}/parcel-esmodule-example`,
+      title: 'parcel-esmodule-example',
       favicon: 'public/favicon.ico',
       meta: {
         viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
@@ -22,8 +22,16 @@ module.exports = ({variant, env}) => ({
       }
     }),
     new ScriptExtHtmlWebpackPlugin(choose(variant)({
-      legacy: { defaultAttribute: 'async' },
-      modern: { module: /.*/ },
+      legacy: {
+        defaultAttribute: 'async',
+        custom: [
+          {
+            test: /.*/,
+            attribute: 'nomodule',
+          }
+        ]
+      },
+      modern: {module: /.*/},
     })),
   ],
   module: {
