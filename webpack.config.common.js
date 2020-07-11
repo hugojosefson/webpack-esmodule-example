@@ -1,5 +1,4 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
@@ -12,7 +11,6 @@ module.exports = ({variant, env}) => ({
     path: path.resolve(__dirname, `target/${env}/${variant}`)
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'head',
