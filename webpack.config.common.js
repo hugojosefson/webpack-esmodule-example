@@ -1,13 +1,14 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const pkg = require('./package.json')
 
 const choose = variant => choices => choices[variant]
 
 const htmlOptions = filename => ({
   filename,
   inject: 'head',
-  title: 'parcel-esmodule-example',
+  title: pkg.title || `${pkg.name}: ${pkg.description}`,
   favicon: 'public/favicon.ico',
   meta: {
     viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
