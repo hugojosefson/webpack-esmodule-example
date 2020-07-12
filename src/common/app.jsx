@@ -7,9 +7,7 @@ export default async () => {
   return () => {
     const [state, setState] = createState({count: 0})
     const t = setInterval(() => setState('count', c => c + 1), 1000)
-
-    // remove interval when Component destroyed:
-    onCleanup(() => clearInterval(t));
+    onCleanup(() => clearInterval(t))
 
     return () => <main>
       <a href="https://picsum.photos/"><Image src="https://picsum.photos/300/200?grayscale"
