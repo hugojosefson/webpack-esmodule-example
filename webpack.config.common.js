@@ -4,6 +4,17 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
 const choose = variant => choices => choices[variant]
 
+const htmlOptions = filename => ({
+  filename,
+  inject: 'head',
+  title: 'parcel-esmodule-example',
+  favicon: 'public/favicon.ico',
+  meta: {
+    viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
+    'X-UA-Compatible': {'http-equiv': 'X-UA-Compatible', content: 'ie=edge'}
+  }
+})
+
 module.exports = ({variant, env}) => ({
   entry: `./src/variant/${variant}/index.jsx`,
   output: {
@@ -11,15 +22,9 @@ module.exports = ({variant, env}) => ({
     path: path.resolve(__dirname, `target/${env}`)
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: `index-${variant}.html`,
-      inject: 'head',
-      title: 'parcel-esmodule-example',
-      favicon: 'public/favicon.ico',
-      meta: {
-        viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
-        'X-UA-Compatible': {'http-equiv': 'X-UA-Compatible', content: 'ie=edge'}
-      }
+    choose(env)({
+      dev: new HtmlWebpackPlugin(htmlOptions(`index.html`)),
+      prod: new HtmlWebpackPlugin(htmlOptions(`index-${variant}.html`)),
     }),
     new ScriptExtHtmlWebpackPlugin(choose(variant)({
       legacy: {
