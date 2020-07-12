@@ -1,6 +1,6 @@
 {
-  "name": "parcel-esmodule-example",
-  "description": "Trying to parcel etc for both modern and legacy browsers.",
+  "name": "webpack-esmodule-example",
+  "description": "Using webpack for both modern and legacy browsers, at the same time.",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
