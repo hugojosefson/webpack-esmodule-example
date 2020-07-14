@@ -1,32 +1,28 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const CommonConfig = require('./webpack.config.common.js')
-
-const variants = ['legacy', 'modern']
+const {default: config, variants} = require('./shared.config.js')
 
 module.exports = variants.map(variant => {
-  const commonConfig = CommonConfig({variant, env: 'prod'})
+  const mode = 'production'
+  const common = config({mode, variant})
   return {
-    ...commonConfig,
+    mode,
     name: variant,
-    mode: 'production',
     devtool: 'source-map',
+    entry: common.entry,
+    output: common.output,
     module: {
-      ...commonConfig.module,
       rules: [
-        ...commonConfig.module.rules,
+        common.babelRule,
         {
           test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-          ],
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
       ],
     },
     plugins: [
-      ...commonConfig.plugins,
+      ...common.htmlPlugins,
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
       }),
@@ -42,10 +38,7 @@ module.exports = variants.map(variant => {
           },
         }),
         new TerserPlugin({
-          // Use multi-process parallel running to improve the build speed
-          // Default number of concurrent runs: os.cpus().length - 1
           parallel: true,
-          // Enable file caching
           cache: true,
           sourceMap: true,
         }),

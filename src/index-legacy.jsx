@@ -1,3 +1,3 @@
 import 'core-js'
 import 'regenerator-runtime'
-import '../../common/index.jsx'
+import './index.jsx'

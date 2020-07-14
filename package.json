@@ -5,11 +5,11 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "serve target/prod",
+    "start": "serve target/production",
     "prebuild": "run-s clean",
     "clean": "rimraf target",
     "build": "webpack --config=webpack.config.prod.js",
-    "postbuild": "merge-html target/prod/index-modern.html target/prod/index-legacy.html > target/prod/index.html && rimraf target/prod/index-modern.html target/prod/index-legacy.html",
+    "postbuild": "merge-html target/production/index-modern.html target/production/index-legacy.html > target/production/index.html && rimraf target/production/index-modern.html target/production/index-legacy.html",
     "build:modern": "webpack --config=webpack.config.prod.js --config-name=modern",
     "build:legacy": "webpack --config=webpack.config.prod.js --config-name=legacy",
     "dev": "run-p dev:*",

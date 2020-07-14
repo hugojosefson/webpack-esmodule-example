@@ -1,28 +1,29 @@
-const CommonConfig = require('./webpack.config.common.js')
-
-const choose = variant => choices => choices[variant]
-const variants = ['legacy', 'modern']
+const {default: config, choose, variants} = require('./shared.config.js')
 
 module.exports = variants.map(variant => {
-  const commonConfig = CommonConfig({variant, env: 'dev'})
+  const mode = 'development'
+  const common = config({mode, variant})
   return {
-    ...commonConfig,
+    mode,
     name: variant,
-    mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
       contentBase: 'public',
       port: choose(variant)({modern: 1234, legacy: 1235})
     },
+    entry: common.entry,
+    output: common.output,
     module: {
-      ...commonConfig.module,
       rules: [
-        ...commonConfig.module.rules,
+        common.babelRule,
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: ['style-loader', 'css-loader'],
         },
-      ]
-    }
+      ],
+    },
+    plugins: [
+      ...common.htmlPlugins,
+    ],
   }
 })
