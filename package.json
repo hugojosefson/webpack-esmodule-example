@@ -10,7 +10,7 @@
     "jest": "modern test",
     "prebuild": "run-p clean lint",
     "clean": "rimraf target",
-    "lint": "modern lint",
+    "lint": "modern lint '**/*'",
     "build": "webpack --config=webpack.config.prod.js",
     "postbuild": "merge-html target/production/index-modern.html target/production/index-legacy.html > target/production/index.html && rimraf target/production/index-modern.html target/production/index-legacy.html",
     "build:modern": "webpack --config=webpack.config.prod.js --config-name=modern",
