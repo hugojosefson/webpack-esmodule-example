@@ -5,7 +5,7 @@ import Image from './image.jsx'
 export default async () => {
   const Greeting = await resolve(import('./greeting.jsx'))
   return () => {
-    const [state, setState] = createState({ count: 0 })
+    const [state, setState] = createState({ count: window.config.START_COUNT })
     const t = setInterval(() => setState('count', c => c + 1), 1000)
     onCleanup(() => clearInterval(t))
 

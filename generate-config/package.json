@@ -1,0 +1,7 @@
+{
+  "name": "generate-config",
+  "private": true,
+  "dependencies": {
+    "@hugojosefson/env-config": "^2.0.1"
+  }
+}
