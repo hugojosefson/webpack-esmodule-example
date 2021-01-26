@@ -34,9 +34,8 @@ yarn
 yarn dev
 ```
 
-The *modern* one will be available on
+The _modern_ one will be available on
 [http://localhost:1234](http://localhost:1234).
 
-The *legacy* one will be available on
+The _legacy_ one will be available on
 [http://localhost:1235](http://localhost:1235).
-

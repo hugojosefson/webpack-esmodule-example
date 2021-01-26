@@ -1,1 +1,4 @@
-export default ({whom, type = 'h1'}) => <Dynamic component={type}>Hello, {whom}!</Dynamic>
+export default ({ whom, type = 'h1' }) => (
+  // eslint-disable-next-line react/jsx-no-undef
+  <Dynamic component={type}>Hello, {whom}!</Dynamic>
+)

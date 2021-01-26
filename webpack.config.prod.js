@@ -1,11 +1,11 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const {default: config, variants} = require('./shared.config.js')
+const { default: config, variants } = require('./shared.config.js')
 
 module.exports = variants.map(variant => {
   const mode = 'production'
-  const common = config({mode, variant})
+  const common = config({ mode, variant })
   return {
     mode,
     name: variant,

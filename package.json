@@ -6,15 +6,17 @@
   "license": "MIT",
   "scripts": {
     "start": "serve target/production",
-    "prebuild": "run-s clean",
+    "prebuild": "run-p clean lint",
     "clean": "rimraf target",
+    "lint": "modern lint",
     "build": "webpack --config=webpack.config.prod.js",
     "postbuild": "merge-html target/production/index-modern.html target/production/index-legacy.html > target/production/index.html && rimraf target/production/index-modern.html target/production/index-legacy.html",
     "build:modern": "webpack --config=webpack.config.prod.js --config-name=modern",
     "build:legacy": "webpack --config=webpack.config.prod.js --config-name=legacy",
     "dev": "run-p dev:*",
     "dev:modern": "webpack serve --config=webpack.config.dev.js --config-name=modern",
-    "dev:legacy": "webpack serve --config=webpack.config.dev.js --config-name=legacy"
+    "dev:legacy": "webpack serve --config=webpack.config.dev.js --config-name=legacy",
+    "precommit": "modern precommit"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -26,6 +28,7 @@
     "css-loader": "^5.0.1",
     "html-webpack-plugin": "^4.5.1",
     "mini-css-extract-plugin": "^1.3.4",
+    "modern-node": "^2.9.0",
     "npm-run-all": "^4.1.5",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "rimraf": "^3.0.2",
