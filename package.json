@@ -6,6 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "serve target/production",
+    "test": "run-s lint jest",
+    "jest": "modern test",
     "prebuild": "run-p clean lint",
     "clean": "rimraf target",
     "lint": "modern lint",
