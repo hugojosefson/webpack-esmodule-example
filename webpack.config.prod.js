@@ -37,11 +37,7 @@ module.exports = variants.map(variant => {
             },
           },
         }),
-        new TerserPlugin({
-          parallel: true,
-          cache: true,
-          sourceMap: true,
-        }),
+        new TerserPlugin(),
       ],
     },
   }
