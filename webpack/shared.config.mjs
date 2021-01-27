@@ -1,11 +1,11 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'
-import Config from './generate-config/config.mjs'
+import Config from '../generate-config/config.mjs'
 import { createRequire } from 'module'
 import { fileURLToPath } from 'url'
 const require = createRequire(import.meta.url)
-const pkg = require('./package.json')
+const pkg = require('../package.json')
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -14,14 +14,14 @@ export const variants = ['legacy', 'modern']
 
 const htmlOptions = ({ env, filename }) => ({
   filename,
-  template: 'src/index.ejs',
+  template: path.resolve(__dirname, '../src/index.ejs'),
   templateParameters: (compilation, assets, assetTags, options) => ({
     title: options.title,
     configFromEnv: env ? Config(env) : undefined,
   }),
   inject: 'head',
   title: pkg.title || `${pkg.name}: ${pkg.description}`,
-  favicon: 'public/favicon.ico',
+  favicon: path.resolve(__dirname, '../public/favicon.ico'),
   meta: {
     viewport: 'width=device-width, user-scalable=yes, initial-scale=1.0',
     'X-UA-Compatible': { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' },
@@ -30,12 +30,12 @@ const htmlOptions = ({ env, filename }) => ({
 
 export default ({ env, mode, variant }) => ({
   entry: choose(variant)({
-    modern: './src/index.jsx',
-    legacy: './src/index-legacy.jsx',
+    modern: path.resolve(__dirname, '../src/index.jsx'),
+    legacy: path.resolve(__dirname, '../src/index-legacy.jsx'),
   }),
   output: {
     filename: `${variant}.[name].[contenthash].js`,
-    path: path.resolve(__dirname, `target/${mode}`),
+    path: path.resolve(__dirname, `../target/${mode}`),
   },
   htmlPlugins: [
     choose(mode)({
