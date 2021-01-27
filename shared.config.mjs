@@ -16,13 +16,7 @@ const htmlOptions = ({ env, filename }) => ({
   filename,
   template: 'src/index.ejs',
   templateParameters: (compilation, assets, assetTags, options) => ({
-    compilation,
-    webpackConfig: compilation.options,
-    htmlWebpackPlugin: {
-      tags: assetTags,
-      files: assets,
-      options,
-    },
+    title: options.title,
     configFromEnv: env ? Config(env) : undefined,
   }),
   inject: 'head',
