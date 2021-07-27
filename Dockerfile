@@ -10,8 +10,9 @@ COPY .*config  ./
 COPY .*ignore  ./
 COPY .*rc  ./
 
-COPY *.js ./
+COPY webpack ./webpack
 COPY public ./public
+COPY generate-config ./generate-config
 COPY test ./test
 COPY src ./src
 
