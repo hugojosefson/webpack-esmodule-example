@@ -1,4 +1,4 @@
-FROM node:15 as builder
+FROM node:16 as builder
 WORKDIR /app
 
 # Cache dependencies
@@ -26,7 +26,7 @@ RUN yarn test
 RUN yarn build
 
 #######################################################################################################################
-FROM node:15 as runtime
+FROM node:16 as runtime
 
 WORKDIR /app
 
