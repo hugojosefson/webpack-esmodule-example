@@ -1,11 +1,12 @@
 import { resolve } from './async-component.mjs'
-import { createState, onCleanup } from 'solid-js'
+import { onCleanup } from 'solid-js'
+import { createStore } from 'solid-js/store'
 import Image from './image.jsx'
 
 export default async () => {
   const Greeting = await resolve(import('./greeting.jsx'))
   return () => {
-    const [state, setState] = createState({ count: window.config.START_COUNT })
+    const [state, setState] = createStore({ count: window.config.START_COUNT })
     const t = setInterval(() => setState('count', c => c + 1), 1000)
     onCleanup(() => clearInterval(t))
 

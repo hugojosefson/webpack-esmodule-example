@@ -1,6 +1,6 @@
 import './style.css'
 import { resolve } from './async-component.mjs'
-import { render } from 'solid-js/dom'
+import { render } from 'solid-js/web'
 
 const createDivAndAppendTo = parentElement => {
   const element = document.createElement('div')
