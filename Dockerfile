@@ -30,6 +30,12 @@ FROM node:15 as runtime
 
 WORKDIR /app
 
+## Use tini for init process. Forwards and uses signals correctly, supporting graceful shutdown.
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /
+RUN chmod +rx /tini
+ENTRYPOINT ["/tini", "--"]
+
 # Runtime dependencies
 RUN npm install -g \
   @hugojosefson/merge-html \
