@@ -1,4 +1,4 @@
-FROM node:16 as builder
+FROM docker.io/library/node:16 as builder
 WORKDIR /app
 
 # Cache dependencies
@@ -26,7 +26,7 @@ RUN yarn test
 RUN yarn build
 
 #######################################################################################################################
-FROM node:16 as runtime
+FROM docker.io/library/node:16 as runtime
 
 WORKDIR /app
 
