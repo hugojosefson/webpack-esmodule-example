@@ -9,7 +9,7 @@ export default (env, argv) =>
       name: variant,
       devtool: 'inline-source-map',
       devServer: {
-        contentBase: 'public',
+        static: { publicPath: 'public' },
         port: choose(variant)({ modern: 1234, legacy: 1235 }),
       },
       entry: common.entry,

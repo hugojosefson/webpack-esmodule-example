@@ -1,7 +1,9 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import MiniCssExtractPluginModule from 'mini-css-extract-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import config, { variants } from './shared.config.mjs'
+
+const { default: MiniCssExtractPlugin } = MiniCssExtractPluginModule
 
 export default (env, argv) =>
   variants.map(variant => {
